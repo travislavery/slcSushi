@@ -1,7 +1,10 @@
 # slcSushi
 For those who prefer their lunch suggestions in JSON. 
 
-Clone the repo, run npm install, and then npm start. Access on http://localhost:3000/. 
+1. Clone the repo
+2. run npm install
+3. create a .env file and add your yelp fusion API key (https://fusion.yelp.com/) under a variable named YELP_KEY='your-key-here'
+4. run npm start. Access on http://localhost:3000/. 
 
 Search using the URL: 
 http://localhost:3000/lunch/location or http://localhost:3000/lunch/location/category.
