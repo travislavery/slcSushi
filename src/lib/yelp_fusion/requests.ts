@@ -21,6 +21,6 @@ const requestYelpData = async (url: string) => {
             Authorization: `Bearer ${process.env.YELP_KEY}`
         }
     }
-    const response = fetch(url, options)
-    return (await response).json()
+    const response = await fetch(url, options)
+    return response.json()
 }
