@@ -1,19 +1,21 @@
 import { SearchOptions } from '../../types'
-import { YelpFusion } from "./types"
+import { Business, BusinessResponse, ReviewResponse, YelpResponse} from "./types"
 
-export const requestReviewData = async (business: YelpFusion.Business): Promise<YelpFusion.ReviewResponse> => {
+export const requestReviewData = async (business: Business): Promise<ReviewResponse> => {
     const url = `https://api.yelp.com/v3/businesses/${business.id}/reviews?limit=3&sort_by=yelp_sort`
-    return requestYelpData(url)
+    const reviewData = await requestYelpData<ReviewResponse>(url);
+    return reviewData
 }
 
-export const requestBusinessData = async (queryParams: SearchOptions): Promise<YelpFusion.BusinessResponse> => {
+export const requestBusinessData = async (queryParams: SearchOptions): Promise<BusinessResponse> => {
     const baseUrl = 'https://api.yelp.com/v3/businesses/';
     const query = Object.entries(queryParams).map(([key, val]) => `${key}=${val}`).join('&');
     const url = encodeURI(`${baseUrl}search?${query}&sort_by=best_match&limit=5`)
-    return requestYelpData(url);
+    const businessData = await requestYelpData<BusinessResponse>(url);
+    return businessData
 }
 
-const requestYelpData = async (url: string) => {
+const requestYelpData = async <T extends YelpResponse> (url: string): Promise<T> => {
     const options = {
         method: 'GET',
         headers: {

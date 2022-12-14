@@ -1,7 +1,7 @@
-import { YelpFusion } from "./types"
+import { LunchOptionData } from "./types"
 import { LunchOption } from "../../types"
 
-export const formatLunchResponse = (businesses: YelpFusion.LunchOptionData[]): LunchOption[]  => {
+export const formatLunchResponse = (businesses: LunchOptionData[]): LunchOption[]  => {
     return businesses.map(business => {
         const reviews = business.reviews.reviews.map(review => {
             return {
